@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RetrofitWeatherApp</string>
+    <string name="submit">Submit</string>
+    <string name="entercity">Enter City</string>
+    <string name="open_weather_maps_app_id">93e60c8b4f9a776af69b368e302447b9</string>
+    <string name="place_not_found">place not found</string>
+    <string name="date">Date</string>
+    <string name="text">Text</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
+</resources>
