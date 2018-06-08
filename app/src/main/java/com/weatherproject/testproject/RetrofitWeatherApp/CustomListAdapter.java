@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.weatherproject.testproject.RetrofitWeatherApp.models.Forecast;
-import com.weatherproject.testproject.WeatherAppRetrofit.R;
+import com.weatherproject.testproject.RetrofitWeatherApp.R;
 
 import java.util.ArrayList;
 

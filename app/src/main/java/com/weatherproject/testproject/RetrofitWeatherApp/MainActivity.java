@@ -18,7 +18,7 @@ import com.weatherproject.testproject.RetrofitWeatherApp.models.Forecast;
 import com.weatherproject.testproject.RetrofitWeatherApp.models.JsonWeatherResponse;
 import com.weatherproject.testproject.RetrofitWeatherApp.rest.ApiEndpointInterface;
 import com.weatherproject.testproject.RetrofitWeatherApp.rest.RestApiClient;
-import com.weatherproject.testproject.WeatherAppRetrofit.R;
+import com.weatherproject.testproject.RetrofitWeatherApp.R;
 
 
 import java.lang.reflect.Type;
@@ -67,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String city = etCity.getText().toString();
-                arrayList.clear();
+                if(forecastData!=null){
+                    forecastData.clear();
+                    listAdapter.notifyDataSetChanged();
+                }
                 findWeather(city);
 
             }
@@ -102,20 +105,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(retrofit2.Call<JsonWeatherResponse> call, Response<JsonWeatherResponse> response) {
 
-                forecastData = response.body().getQuery().getResults().getChannel().getItem().getForecast();
-                if(forecastData!=null){
-                    renderWeather(forecastData);
-                }else{
+                if(response.body().getQuery().getResults()==null){
                     Toast.makeText(getApplicationContext(),
                             getString(R.string.place_not_found),
                             Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+
+                }else{
+                    forecastData = response.body().getQuery().getResults().getChannel().getItem().getForecast();
+                    renderWeather(forecastData);
                 }
-                Log.d("day is", response.body()+"data");
+
             }
 
             @Override
             public void onFailure(retrofit2.Call<JsonWeatherResponse> call, Throwable t) {
-                Log.d("error from rest api",t.toString());
+                //Log.d("error from rest api",t.toString());
             }
         });
 
